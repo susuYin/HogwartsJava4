@@ -1,0 +1,77 @@
+package com.sean;
+
+import com.github.tomakehurst.wiremock.WireMockServer;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+import static com.github.tomakehurst.wiremock.client.WireMock.*;
+import static com.github.tomakehurst.wiremock.core.WireMockConfiguration.wireMockConfig;
+
+/**
+ * @Author sean
+ * @Date 2020/12/18 21:04
+ * @Version 1.0
+ */
+public class WireMockDemoTest {
+    static WireMockServer wireMockServer;
+
+    @BeforeAll
+    public static void initData() {
+        wireMockServer = new WireMockServer(wireMockConfig().port(9998)); //No-args constructor will start on port 8080, no HTTPS
+        wireMockServer.start();
+        configureFor("localhost", 9998);
+    }
+
+    @Test
+    public void stubMock() {
+        try {
+            stubFor(get(urlEqualTo("/my/resource"))
+                    .withHeader("Accept", equalTo("text/xml"))
+                    .willReturn(aResponse()
+                            .withStatus(200)
+                            .withHeader("Content-Type", "text/xml")
+                            .withBody("<response>hogwarts</response>")));
+            Thread.sleep(500000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+    @Test
+    public void easyMock(){
+        try {
+            stubFor(get(urlEqualTo("/my/resource"))
+                    .withHeader("Accept", equalTo("text/xml"))
+                    .willReturn(aResponse()
+                            .withStatus(200)
+                            .withHeader("Content-Type", "text/xml")
+                            .withBody("<response>sean coming in...</response>")));
+            Thread.sleep(10000);
+            reset();
+            stubFor(get(urlEqualTo("/my/resource"))
+                    .withHeader("Accept", equalTo("text/xml"))
+                    .willReturn(aResponse()
+                            .withStatus(200)
+                            .withHeader("Content-Type", "text/xml")
+                            .withBody("<response>我是测试人Sean,定向4期班</response>")));
+            Thread.sleep(500000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+    @Test
+    public void proxyMockTest(){
+
+            stubFor(get(urlMatching(".*")).atPriority(10)
+            .willReturn(aResponse().proxiedFrom("https://ceshiren.com")));
+        try {
+            stubFor(get(urlEqualTo("/categories_and_latest")).atPriority(10)
+            .willReturn(aResponse().withBody(Files.readAllBytes(Paths.get(WireMockDemoTest.class.getResource("/mock.json").toURI())))));
+            Thread.sleep(500000);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}
