@@ -4,7 +4,7 @@ description: 初步测试创建部门用例
 steps:
   - api: tokenhelper
     action: getToken
-    actualParameter: ["ww5ef451bf006ec894","EcEIog2OJ8AtO7PDaqt_yqHKqmYXqwSZKDhyfU1aSiU"]
+    actualParameter: ["wwe653983e4c732493","T72_Vgw9TaNS-FLDU2gJlw6AteerMXsuMval9kGNZbc"]
     saveGlobal:
       accesstoken: access_token
     asserts:
