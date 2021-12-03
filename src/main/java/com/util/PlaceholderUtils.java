@@ -26,7 +26,7 @@ public class PlaceholderUtils {
      */
     public static final String PLACEHOLDER_SUFFIX = "}";
 
-
+    //test:带有${token}需要被替换的字符串  parameter:{"token":"23kjfskjf"}
     public static String resolveString(String text, Map<String, String> parameter) {
         if (parameter == null || parameter.isEmpty()||text == null || text.isEmpty()) {
             return text;
@@ -40,6 +40,7 @@ public class PlaceholderUtils {
             /**
             * 计算变量名结束的位置
             **/
+            //dic.IndexOf("j",5,2);// = 6 从前往后，从第五位开始查，查二位（即从第五位到第六位），定位j
             int endIndex = buf.indexOf(PLACEHOLDER_SUFFIX, startIndex + PLACEHOLDER_PREFIX.length());
             if (endIndex != -1) {
                 /**
@@ -71,7 +72,7 @@ public class PlaceholderUtils {
         }
         return buf.toString();
     }
-
+    //二次封装--调用resolveString对List数据进行替换
     public static ArrayList<String> resolveList(ArrayList<String> list, Map<String, String> parameter) {
         if (parameter == null || parameter.isEmpty() || list == null || list.isEmpty()) {
             return list;
@@ -99,5 +100,13 @@ public class PlaceholderUtils {
                 }
             });
         return retureMap;
+    }
+
+    public static void main(String[] args) {
+        String text="djjjfkdj${token}kdjfksjdfk";
+        HashMap<String,String> param=new HashMap<String,String>();
+        param.put("token","39389");
+        String finalString=resolveString(text,param);
+        System.out.println(finalString);
     }
 }
