@@ -43,10 +43,12 @@ public class ApiLoader {
             }
         });
     }
+    //一个apiyaml里actions可能是一个列表（多个接口）,每个接口有个名字，通过名字查找api接口--获取正确的apiAction对象
+    //apiName--接口yaml定义的接口列表名
     public static ApiActionModel getAction(String apiName, String actionName){
         final ApiActionModel[] apiActionModel = {new ApiActionModel()};
         apis.stream().filter(api -> api.getName().equals(apiName)).forEach(api ->{
-            apiActionModel[0] = api.getActions().get(actionName);
+            apiActionModel[0]= api.getActions().get(actionName);
         });
         if(apiActionModel[0]!=null){
             return apiActionModel[0];

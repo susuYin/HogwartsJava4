@@ -126,7 +126,7 @@ public class ApiActionModel {
          * 1.确定请求方法和URL
          */
         if (post != null) {
-            runUrl = post;
+            runUrl = post;//url=post的值
             method = "post";
         } else if (get != null) {
             runUrl = get;
@@ -137,9 +137,11 @@ public class ApiActionModel {
          * PS:这里需要编写占位符工具类PlaceholderUtils
          */
         if (query != null) {
+            //先判断query是否有值，需要替换的值都存在全局变量中
             finalQuery.putAll(PlaceholderUtils.resolveMap(query, GlobalVariables.getGlobalVariables()));
         }
-        //body全局变量替换
+        //body全局变量替换，如果不是query传的就是body,body和url都要定义成运行时的，方法变量--方法结束就消失，
+        //一个action里面会有多个接口，多个body
         runBody = PlaceholderUtils.resolveString(runBody, GlobalVariables.getGlobalVariables());
         //url全局变量替换
         runUrl = PlaceholderUtils.resolveString(runUrl, GlobalVariables.getGlobalVariables());

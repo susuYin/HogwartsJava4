@@ -21,11 +21,13 @@ import java.util.HashMap;
  * @packageName: com.apiobject.framework.api
  * @description: 接口对象类
  * @data: 2020-12-26 下午2:37
+ * 对应/resource/api里的yaml文件
+ * 把yaml文件加载成ApiObjectModel对象
  **/
 public class ApiObjectModel {
     private String name;
     private HashMap<String , ApiActionModel> actions;
-    private HashMap<String ,String> obVariables = new HashMap<>();
+    private HashMap<String ,String> obVariables = new HashMap<>();//装载变量
 
     public String getName() {
         return name;

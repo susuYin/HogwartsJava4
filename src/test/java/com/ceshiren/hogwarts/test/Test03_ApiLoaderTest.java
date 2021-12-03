@@ -36,6 +36,7 @@ public class Test03_ApiLoaderTest {
         ArrayList<String> actualParameter = new ArrayList<>();
         actualParameter.add("ww5ef451bf006ec894");
         actualParameter.add("EcEIog2OJ8AtO7PDaqt_yqHKqmYXqwSZKDhyfU1aSiU");
-        ApiLoader.getAction("tokenhelper","getToken").run(actualParameter);
+        //ApiLoader.getAction("tokenhelper","getToken").run(actualParameter);
+        ApiLoader.getAction("department","createDepartment");
     }
 }
