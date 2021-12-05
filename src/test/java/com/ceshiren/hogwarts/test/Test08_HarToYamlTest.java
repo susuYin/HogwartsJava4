@@ -66,6 +66,7 @@ public class Test08_HarToYamlTest {
         mapper.writeValue(new File("src/test/resources/har/tokenhelper.yaml"),apiObjectModel);
     }
     public String getRequestName(String url) {
+        //截取？之前的字符串
         String[] suburl = url.split("\\u003F")[0].split("/");
         String name = "";
         if (suburl.length > 1) {
