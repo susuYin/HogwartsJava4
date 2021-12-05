@@ -86,7 +86,7 @@ public class ApiTestCaseModel {
     }
     public void run(){
         /**
-         * 1、加载用例层关键字变量
+         * 1、加载用例层关键字变量--比如${自定义函数}
          */
         this.testCaseVariables.put("getTimeStamp", FakerUtils.getTimeStamp());
         logger.info("用例变量更新： "+testCaseVariables);
@@ -97,6 +97,7 @@ public class ApiTestCaseModel {
             StepResult stepResult =  step.run(testCaseVariables);
             /**
              * 3、处理step返回的save变量
+             * putAll--把一个map放到另外一个map中去
              */
             if(stepResult.getStepVariables().size()>0){
                 testCaseVariables.putAll(stepResult.getStepVariables());
