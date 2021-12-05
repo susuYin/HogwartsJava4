@@ -17,7 +17,7 @@ import java.util.HashMap;
  * @author: kuohai
  * @className: StepResult
  * @packageName: com.apiobject.framework.steps
- * @description: step执行结果对象
+ * @description: step执行结果对象（存储每一步执行的结果）
  * @data: 2020-12-26 下午3:49
  **/
 public class StepResult extends BaseResult {

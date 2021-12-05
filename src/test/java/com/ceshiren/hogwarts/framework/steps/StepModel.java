@@ -27,6 +27,7 @@ import static org.hamcrest.Matchers.equalTo;
  * @className: StepModel
  * @packageName: com.apiobject.framework.steps
  * @description: 用例中的step对象
+ *creatdepartment.yaml
  * @data: 2020-12-26 下午3:36
  **/
 public class StepModel {
@@ -36,16 +37,16 @@ public class StepModel {
      * 1、需要定义AssertModel类
      */
     private String api;
-    private String action;
-    private ArrayList<String> actualParameter;
+    private String action;//接口名
+    private ArrayList<String> actualParameter;//一个接口对应一个实参
     private ArrayList<AssertModel> asserts;
     private HashMap<String, String> save;
     private HashMap<String, String> saveGlobal;
     /**
      * 2、需要定义StepResult类
      */
-    private ArrayList<String> finalActualParaeter = new ArrayList<>();
-    private HashMap<String, String> stepVariables = new HashMap<>();
+    private ArrayList<String> finalActualParaeter = new ArrayList<>();//实参里面可能也有占位符"部门${getTimeStamp}"
+    private HashMap<String, String> stepVariables = new HashMap<>();//用于替换实参里面${}的变量
     private StepResult stepResult = new StepResult();
     private ArrayList<Executable> assertList = new ArrayList<>();
 
@@ -100,6 +101,7 @@ public class StepModel {
     public StepResult run(HashMap<String, String> testCaseVariables) {
         /**
          * 3、需要定义AssertModel类
+         * testCaseVariables--存储每一个step返回的变量
          */
         if (actualParameter != null) {
             finalActualParaeter.addAll(PlaceholderUtils.resolveList(actualParameter, testCaseVariables));
@@ -110,7 +112,7 @@ public class StepModel {
          */
         Response response = ApiLoader.getAction(api, action).run(finalActualParaeter);
         /**
-         * 5、存储save
+         * 5、存储save--每一步中间存储的变量，path--jsonpath
          */
         if (save != null) {
             save.forEach((variablesName, path) -> {
@@ -121,7 +123,7 @@ public class StepModel {
             });
         }
         /**
-         * 6、存储save
+         * 6、存储save--每一步中间的变量存到全局变量
          */
         if (saveGlobal != null) {
             saveGlobal.forEach((variablesName, path) -> {
