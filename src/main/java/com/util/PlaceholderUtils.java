@@ -103,9 +103,10 @@ public class PlaceholderUtils {
     }
 
     public static void main(String[] args) {
-        String text="djjjfkdj${token}kdjfksjdfk";
+        String text="djjjfkdj${token}kdjfk${url}sjdfk";
         HashMap<String,String> param=new HashMap<String,String>();
         param.put("token","39389");
+        param.put("url","http://baidu.com");
         String finalString=resolveString(text,param);
         System.out.println(finalString);
     }

@@ -6,6 +6,7 @@
  */
 package com.ceshiren.hogwarts.test;
 
+import com.ceshiren.hogwarts.framework.api.ApiObjectModel;
 import com.ceshiren.hogwarts.framework.global.ApiLoader;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;

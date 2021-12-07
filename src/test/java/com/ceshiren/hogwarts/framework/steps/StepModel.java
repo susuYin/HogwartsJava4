@@ -100,7 +100,7 @@ public class StepModel {
 
     public StepResult run(HashMap<String, String> testCaseVariables) {
         /**
-         * 3、需要定义AssertModel类
+         * 3、替换实参中的变量
          * testCaseVariables--存储每一个step返回的变量
          */
         if (actualParameter != null) {
