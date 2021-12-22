@@ -54,10 +54,14 @@ public class BasePage {
                     ParamsTest.class.getResourceAsStream(String.format("/framework/%s",className)),
                     typeReference);
 
-//            pageClass.getPO("main_po.yaml").stepRun("search");
+           //pageClass.getPO("main_po.yaml").stepRun("search");
 
             pages.put(name, pageClass);
-            pageClass.stepRun("init");
+            //step的名称
+            System.out.println(pageClass.yamlSource.keySet());
+            pageClass.yamlSource.keySet().forEach(key-> pageClass.stepRun(key));
+            //pageClass.stepRun("init");
+            //pageClass.stepRun("search");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -92,4 +96,8 @@ public class BasePage {
         seleniumTestCase.run();
     }
 
+    public static void main(String[] args) {
+        BasePage basePage=new BasePage();
+        basePage.poInit("mainPage","main_po.yaml");
+    }
 }
