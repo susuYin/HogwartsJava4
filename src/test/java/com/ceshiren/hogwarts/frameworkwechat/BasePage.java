@@ -58,9 +58,9 @@ public class BasePage {
 
             pages.put(name, pageClass);
             //step的名称
-            System.out.println(pageClass.yamlSource.keySet());
-            pageClass.yamlSource.keySet().forEach(key-> pageClass.stepRun(key));
-            //pageClass.stepRun("init");
+//            System.out.println(pageClass.yamlSource.keySet());
+//            pageClass.yamlSource.keySet().forEach(key-> pageClass.stepRun(key));
+            pageClass.stepRun("init");
             //pageClass.stepRun("search");
         } catch (Exception e) {
             e.printStackTrace();
