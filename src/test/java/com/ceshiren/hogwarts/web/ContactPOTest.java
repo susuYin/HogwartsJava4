@@ -10,6 +10,12 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class ContactPOTest {
 
     private static MainPage main;
+    @Test
+    void mainTest() throws IOException, InterruptedException {
+        main=new MainPage();
+        main.contact();
+
+    }
 
     @BeforeAll
     static void beforeAll() throws IOException, InterruptedException {
