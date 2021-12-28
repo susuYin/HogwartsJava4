@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -17,8 +18,8 @@ public class BasePage {
 
     HashMap<String, List<HashMap<String, Object>>> yamlSource=new HashMap<>();
 
-    WebDriver driver;
-    private SeleniumTestCase seleniumTestCase=new SeleniumTestCase();
+    static WebDriver driver=new ChromeDriver();
+    private SeleniumTestCase seleniumTestCase=new SeleniumTestCase(driver);
 
     public BasePage(WebDriver driver) {
         this.driver=driver;
@@ -53,14 +54,18 @@ public class BasePage {
             pageClass.yamlSource=mapper.readValue(
                     ParamsTest.class.getResourceAsStream(String.format("/framework/%s",className)),
                     typeReference);
-
-           //pageClass.getPO("main_po.yaml").stepRun("search");
+            //pageClass.getPO("main_po.yaml").stepRun("search");
 
             pages.put(name, pageClass);
             //step的名称
 //            System.out.println(pageClass.yamlSource.keySet());
 //            pageClass.yamlSource.keySet().forEach(key-> pageClass.stepRun(key));
-            pageClass.stepRun("init");
+//            if(name.equals("mainPage")){
+//                pageClass.stepRun("init");
+//            }
+
+
+
             //pageClass.stepRun("search");
         } catch (Exception e) {
             e.printStackTrace();
@@ -68,6 +73,10 @@ public class BasePage {
     }
 
     BasePage getPO(String name){
+        System.out.println("++++++++++++++++++++++");
+        System.out.println(pages.get(name));
+        System.out.println("++++++++++++++++++++++");
+
         return pages.get(name);
     }
     void stepRun(String method) {
@@ -92,12 +101,13 @@ public class BasePage {
         List<HashMap<String, Object>> steps = yamlSource.get(method);
         //上课的时候最后遇到的问题是这块重新初始化了
         seleniumTestCase.steps=steps;
-        seleniumTestCase.data=Arrays.asList("");
+        seleniumTestCase.data=Arrays.asList("susu");
         seleniumTestCase.run();
     }
 
     public static void main(String[] args) {
         BasePage basePage=new BasePage();
         basePage.poInit("mainPage","main_po.yaml");
+        //basePage.poInit("searchPage","search_po.yaml");
     }
 }

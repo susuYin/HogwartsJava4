@@ -2,15 +2,17 @@
 
 data:
   - banana
-  - junit
+ # - junit
 
 #todo: 支持page object
 steps:
   #  - init: [ mainPage, com.ceshiren.hogwarts.framework.MainPage ]
   - init: [ mainPage, main_po.yaml ]
+  - mainPage.new: { }
   - mainPage.search: { }
-#  - searchPage: {}
-#  - seachPage.search: ${data}
+  - init: [searchPage, search_po.yaml]
+  #- searchPage: {}
+  - searchPage.search: ${data}
 
 #  - chrome: {}
 #  - implicitly_wait: 5

@@ -7,22 +7,23 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class ParamsTest {
-//    @ParameterizedTest
-//    @MethodSource("stringProvider")
-//    void testWithExplicitLocalMethodSource(String argument) {
-//        //todo: 测试步骤
-//        //todo: 测试数据
-//        //todo: 断言
-//        assertNotNull(argument);
-//    }
-//
-//    static Stream<String> stringProvider() {
-//        return Stream.of("apple", "banana");
-//    }
+    @ParameterizedTest
+    @MethodSource("stringProvider")
+    void testWithExplicitLocalMethodSource(String argument) {
+        //todo: 测试步骤
+        //todo: 测试数据
+        //todo: 断言
+        assertNotNull(argument);
+    }
+
+    static Stream<String> stringProvider() {
+        return Stream.of("apple", "banana");
+    }
 
     @ParameterizedTest
 //    @ValueSource(strings = {"search demo1","search demo2"})

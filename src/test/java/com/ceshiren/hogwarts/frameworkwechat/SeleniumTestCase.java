@@ -1,22 +1,31 @@
 package com.ceshiren.hogwarts.frameworkwechat;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 public class SeleniumTestCase extends TestCase{
-    private ChromeDriver driver;
+    private WebDriver driver;
     private WebElement currentElement;
 
+    public SeleniumTestCase(WebDriver driver) {
+        this.driver = driver;
+    }
+
     public void run() {
+        //System.setProperty("webdriver.chrome.driver","C:\\Aliceyyf\\hogwar\\chrome\\chromedriver.exe");
+        //driver=new ChromeDriver();
         steps.forEach(step -> {
-            if (step.keySet().contains("chrome")) {
-                driver = new ChromeDriver();
-            }
+            Set<String> keyset=step.keySet();
+//            if (step.keySet().contains("chrome")) {
+//                driver = new ChromeDriver();
+//            }
             if (step.keySet().contains("quit")) {
                 driver.quit();
             }

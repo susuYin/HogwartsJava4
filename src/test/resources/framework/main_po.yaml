@@ -1,5 +1,5 @@
-init:
-  - chrome: { }
+new:
+  #- chrome: { }
   - implicitly_wait: 5
   - get: https://ceshiren.com
 
